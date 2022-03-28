@@ -18,7 +18,7 @@ URL = 'https://github.com/Florian7843/pykostalpiko'
 EMAIL = 'floriansch7843@gmail.com'
 AUTHOR = 'Florian Schmidt'
 REQUIRES_PYTHON = '>=3.6.0'
-VERSION = '0.1.1'
+VERSION = '0.1.2'
 
 # What packages are required for this module to be executed?
 REQUIRED = [

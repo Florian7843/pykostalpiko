@@ -23,6 +23,7 @@ VERSION = '0.2.0'
 # What packages are required for this module to be executed?
 REQUIRED = [
     # 'requests', 'maya', 'records',
+    'requests', 'asyncio', 'typing', 'aenum'
 ]
 
 # What packages are optional?

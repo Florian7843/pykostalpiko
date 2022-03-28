@@ -1,2 +1,2 @@
-from pykostalpiko.dxs.entries import Entries
+from pykostalpiko.dxs.entries import DxsEntries
 from pykostalpiko.inverter import Inverter

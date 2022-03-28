@@ -1,6 +1,5 @@
 import sys
 
-from pykostalpiko.dxs import entries
 from pykostalpiko.dxs.entries import Entries
 from pykostalpiko.inverter import Inverter
 

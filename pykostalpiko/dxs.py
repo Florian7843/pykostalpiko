@@ -1,7 +1,7 @@
 from aenum import MultiValueEnum
 
 
-class DxsEntries(MultiValueEnum):
+class Entries(MultiValueEnum):
     AnalaogInput1 = 167772417, "Analog Input 1"
     AnalaogInput2 = 167772673, "Analog Input 2"
     AnalaogInput3 = 167772929, "Analog Input 3"

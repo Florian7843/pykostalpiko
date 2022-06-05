@@ -1,15 +1,23 @@
-import asyncio
 import json
 import sys
+import asyncio
+import aiohttp
 
-from pykostalpiko.dxs.entries import DxsEntries
-from pykostalpiko.inverter import Inverter
+from pykostalpiko.Inverter import Piko
 
+def main():
+  asyncio.run(asnyc_main())
 
-async def async_main() -> None:
-    inv = Inverter(ip=sys.argv[1])
-    values = await inv.async_fetch_all()
-    print(json.dumps(values, indent=4))
+async def asnyc_main():
+  cs = aiohttp.ClientSession()
+
+  piko = Piko(cs, sys.argv[1])
+  data = await piko.async_fetch_all()
+
+  print(json.dumps(data, indent=2))
+
+  await cs.close()
+
 
 if __name__ == "__main__":
-    asyncio.run(async_main())
+  main()

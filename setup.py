@@ -17,7 +17,7 @@ DESCRIPTION = 'A library and CLI-tool to fetch the data from a Kostal Piko inver
 URL = 'https://github.com/Florian7843/pykostalpiko'
 EMAIL = 'floriansch7843@gmail.com'
 AUTHOR = 'Florian Schmidt'
-REQUIRES_PYTHON = '>=3.10.0'
+REQUIRES_PYTHON = '>=3.7.0'
 VERSION = '0.99.2'
 
 # What packages are required for this module to be executed?
@@ -122,7 +122,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: Implementation :: CPython',
         'Programming Language :: Python :: Implementation :: PyPy'
     ],

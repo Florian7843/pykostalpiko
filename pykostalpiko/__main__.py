@@ -5,19 +5,18 @@ import aiohttp
 
 from pykostalpiko.Inverter import Piko
 
+
 def main():
-  asyncio.run(asnyc_main())
+    asyncio.run(asnyc_main())
+
 
 async def asnyc_main():
-  cs = aiohttp.ClientSession()
+    async with aiohttp.ClientSession() as session:
+        piko = Piko(session, sys.argv[1])
+        data = await piko.async_fetch_all()
 
-  piko = Piko(cs, sys.argv[1])
-  data = await piko.async_fetch_all()
-
-  print(json.dumps(data, indent=2))
-
-  await cs.close()
+        print(json.dumps(data, indent=2))
 
 
 if __name__ == "__main__":
-  main()
+    main()

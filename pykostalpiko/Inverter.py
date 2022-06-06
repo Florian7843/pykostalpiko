@@ -19,13 +19,13 @@ class Piko:
         """
         Fetch the data from the inverter
 
-        Limited to 0 to 10 DXS entries
+        Limited to 0 to 25 DXS entries
         """
 
         # Check amount of requested entries
         if (len(entries) == 0):
             raise Exception('No entries specified')
-        elif (len(entries) > 10):
+        elif (len(entries) > 25):
             raise Exception('Too many entries specified')
 
         def _build_param(dxs: Entries) -> str:
@@ -43,9 +43,9 @@ class Piko:
         Fetch the data from the inverter
         """
 
-        # Spread the entries into groups of 10 to avoid too many dxsEntries
-        entries_paged = [entries[i:i + 10]
-                         for i in range(0, len(entries), 10)]
+        # Spread the entries into groups of 25 to avoid too many dxsEntries
+        entries_paged = [entries[i:i + 25]
+                         for i in range(0, len(entries), 25)]
         # TODO: Do something with the response
         for req in asyncio.as_completed([self._async_fetch(self._client_session, *entries_page) for entries_page in entries_paged]):
             # Wait for the request to complete

@@ -53,7 +53,7 @@ class Entries(MultiValueEnum):
     HomeOperatingStatus = 16780032, "Home Operating Status"
 
     InverterName = 16777984, "Inverter Name"
-    InverterMake = 16780544, "Inverter Make"
+    InverterType = 16780544, "Inverter Type"
 
     VersionUI = 16779267, "Version UI"
     VersionFW = 16779265, "Version FW"

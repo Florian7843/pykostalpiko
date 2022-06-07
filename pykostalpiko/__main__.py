@@ -1,21 +1,15 @@
-import json
-import sys
 import asyncio
-import aiohttp
-
-from pykostalpiko.Inverter import Piko
+from email.mime import image
+from pykostalpiko.dxs.current_values.grid import phase_1
 
 
 def main():
-    asyncio.run(asnyc_main())
+    asyncio.run(phase_1.POWER)
 
 
 async def asnyc_main():
-    async with aiohttp.ClientSession() as session:
-        piko = Piko(session, sys.argv[1])
-        data = await piko.async_fetch_all()
-
-        print(json.dumps(data, indent=2))
+    print()
+    pass
 
 
 if __name__ == "__main__":

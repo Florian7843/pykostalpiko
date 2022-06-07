@@ -1,0 +1,2 @@
+class Piko:
+    pass

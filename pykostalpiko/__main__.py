@@ -12,6 +12,7 @@ def main():
 
 
 async def asnyc_main():
+    """Request the current values from the piko inverter using the username and password"""
     async with ClientSession() as session:
         async with Piko(session, "192.168.113.1") as piko:
             print(await piko.async_fetch(LIST))

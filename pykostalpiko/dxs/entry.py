@@ -1,7 +1,6 @@
 """Description of DxsEntries."""
 from dataclasses import dataclass
 from typing import Callable, Any
-import pykostalpiko.dxs.current_values
 
 
 @dataclass

@@ -94,7 +94,7 @@ class Piko:
         # Check amount of requested entries
         if len(entries) == 0:
             raise Exception("No entries specified")
-        elif len(entries) > 25:
+        if len(entries) > 25:
             raise Exception("Too many entries specified")
 
         def _build_param(dxs: Descriptor) -> str:
@@ -104,8 +104,8 @@ class Piko:
         url = f"http://{self.host}/api/dxs.json?" + "&".join(params)
 
         async with session.get(url) as response:
-            json = await response.json(content_type="text/plain")
-            return self._format_response(json)
+            json_body = await response.json(content_type="text/plain")
+            return self._format_response(json_body)
 
     async def async_fetch(self, descriptors: list[Descriptor]) -> dict:
         """Fetch the data from the inverter."""
@@ -131,12 +131,13 @@ class Piko:
 
         return data
 
-    def _format_response(self, json) -> dict:
-        if json == None:
+    @classmethod
+    def _format_response(cls, response) -> dict:
+        if response is None:
             return None
 
         new = {}
-        entries = json["dxsEntries"]
+        entries = response["dxsEntries"]
 
         for entry in entries:
             new[find_descriptor_by_id(entry["dxsId"]).name] = entry["value"]

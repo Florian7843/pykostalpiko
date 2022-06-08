@@ -1,13 +1,14 @@
 """Piko Inverter"""
 import asyncio
 import json
-from hashlib import sha1
 from base64 import b64encode
+from hashlib import sha1
 from types import TracebackType
 from typing import Optional, Type
-from aiohttp import ClientSession
-from pykostalpiko.dxs import find_descriptor_by_id
 
+from aiohttp import ClientSession
+
+from pykostalpiko.dxs import find_descriptor_by_id
 from pykostalpiko.dxs.entry import Descriptor
 
 

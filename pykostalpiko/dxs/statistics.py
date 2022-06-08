@@ -1,5 +1,6 @@
 """DxsEntries for all statistics."""
 from dataclasses import dataclass
+
 from pykostalpiko.dxs.entry import Descriptor, DescriptorOptions
 
 

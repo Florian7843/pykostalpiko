@@ -1,8 +1,8 @@
 """DxsEntries general constants and methods."""
 from pykostalpiko.dxs.current_values import LIST as current_values_LIST
 from pykostalpiko.dxs.entry import Descriptor
-from pykostalpiko.dxs.statistics import LIST as statistics_LIST
 from pykostalpiko.dxs.inverter import LIST as inverter_LIST
+from pykostalpiko.dxs.statistics import LIST as statistics_LIST
 
 LIST = current_values_LIST + statistics_LIST + inverter_LIST
 

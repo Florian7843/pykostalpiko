@@ -1,15 +1,20 @@
+"""Simple cli tool to read the kostal piko data."""
 import asyncio
-from email.mime import image
-from pykostalpiko.dxs.current_values.grid import phase_1
+
+from aiohttp import ClientSession
+from pykostalpiko import Piko
+from pykostalpiko.dxs.current_values import LIST
 
 
 def main():
-    asyncio.run(phase_1.POWER)
+    """Run the asyncio main function."""
+    asyncio.run(asnyc_main())
 
 
 async def asnyc_main():
-    print()
-    pass
+    async with ClientSession() as session:
+        async with Piko(session, "192.168.113.1") as piko:
+            print(await piko.async_fetch(LIST))
 
 
 if __name__ == "__main__":

@@ -1,7 +1,9 @@
 """Simple cli tool to read the kostal piko data."""
 import asyncio
+import sys
 
 from aiohttp import ClientSession
+
 from pykostalpiko import Piko
 from pykostalpiko.dxs.current_values import LIST
 
@@ -13,8 +15,14 @@ def main():
 
 async def asnyc_main():
     """Request the current values from the piko inverter using the username and password"""
+
+    user = {}
+
+    if len(sys.argv) == 4:
+        user = {"username": sys.argv[2], "password": sys.argv[3]}
+
     async with ClientSession() as session:
-        async with Piko(session, "192.168.113.1") as piko:
+        async with Piko(session, sys.argv[1], **user) as piko:
             print(await piko.async_fetch(LIST))
 
 

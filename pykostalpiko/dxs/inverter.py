@@ -38,6 +38,7 @@ COUNTRY_SETTINGS = Descriptor(16779522, "Country Settings")
 COUNTRY_SETTINGS_VERSION = Descriptor(16779521, "Country Settings Version")
 
 NAME = ConfigurableDescriptor(16777984, "Name")
+MODEL = Descriptor(16780544, "Model")
 
 # TODO: /settings/general/login
 
@@ -188,6 +189,7 @@ class DataLogger:
 
 LIST = [
     NAME,
+    MODEL,
     OPERATION_STATUS,
     SERIAL_NUMBER,
     ARTICLE_NUMBER,

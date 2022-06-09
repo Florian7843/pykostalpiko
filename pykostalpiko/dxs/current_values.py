@@ -39,8 +39,24 @@ class PVGenerator:
         LIST = [CURRENT, VOLTAGE, POWER]
         LIST_ALL = LIST
 
+    @dataclass
+    class DcInput3:
+        """DxsEntries describing the DC Input 3."""
+
+        CURRENT = Descriptor(33555713, "DC Input 3 Current", "A")
+        VOLTAGE = Descriptor(33555714, "DC Input 3 Voltage", "V")
+        POWER = Descriptor(33555715, "DC Input 3 Power", "W")
+
+        LIST = [CURRENT, VOLTAGE, POWER]
+        LIST_ALL = LIST
+
     LIST = []
-    LIST_ALL = CombinedInput.LIST_ALL + DcInput1.LIST_ALL + DcInput2.LIST_ALL
+    LIST_ALL = (
+        CombinedInput.LIST_ALL
+        + DcInput1.LIST_ALL
+        + DcInput2.LIST_ALL
+        + DcInput3.LIST_ALL
+    )
 
 
 @dataclass

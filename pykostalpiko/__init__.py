@@ -4,7 +4,7 @@ import json
 from base64 import b64encode
 from hashlib import sha1
 from types import TracebackType
-from typing import Optional, Type
+from typing import Any, Optional, Type
 
 from aiohttp import ClientSession
 
@@ -128,6 +128,32 @@ class Piko:
                 data = {**data, **res}
 
         return data
+
+    async def async_set_descriptors(
+        self, descriptors: list[tuple[Descriptor, Any]]
+    ) -> None:
+        """Change the value of a configurable descriptor."""
+        dxsEntries = []
+
+        for descriptor, value in descriptors:
+            # check if descriptor is set to be configurable
+            if not descriptor.options.configurable:
+                raise Exception(
+                    f"Descriptor {descriptor.name} ({descriptor.key}) is not configurable"
+                )
+
+            dxsEntries.append({"dxsId": descriptor.key, "value": value})
+
+        data = {"dxsEntries": dxsEntries}
+
+        async with self._client_session.post(
+            f"http://{self.host}/api/dxs.json?sessionId={self._session_id}",
+            data=json.dumps(data),
+        ) as response:
+            json_body = await response.json(content_type="text/plain")
+
+            if json_body["status"]["code"] != 0:
+                raise Exception("An error occured setting the descriptors")
 
     @classmethod
     def _format_response(cls, response) -> dict:

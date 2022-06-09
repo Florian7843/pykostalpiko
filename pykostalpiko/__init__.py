@@ -3,6 +3,7 @@ import asyncio
 import json
 from base64 import b64encode
 from hashlib import sha1
+from multiprocessing.sharedctypes import Value
 from types import TracebackType
 from typing import Any, Optional, Type
 
@@ -31,7 +32,7 @@ class Piko:
         self.password = password
 
     async def __aenter__(self) -> "Piko":
-        await self._async_login()
+        await self.async_login()
         return self
 
     async def __aexit__(
@@ -40,9 +41,9 @@ class Piko:
         exc_val: Optional[BaseException],
         exc_tb: Optional[TracebackType],
     ) -> None:
-        await self._async_logout()
+        await self.async_logout()
 
-    async def _async_login(self) -> None:
+    async def async_login(self) -> None:
         """Get a logged in sessionId using the username and password"""
 
         # GET a sessionId and Salt for the sessionId
@@ -72,11 +73,11 @@ class Piko:
 
             # Check if the login was successful
             if resp_data["status"]["code"] != 0 or resp_data["session"]["roleId"] != 2:
-                raise Exception("Login failed")
+                raise LoginException("Login failed")
 
             self._session_id = resp_data["session"]["sessionId"]
 
-    async def _async_logout(self) -> None:
+    async def async_logout(self) -> None:
         async with self._client_session.get(
             f"http://{self.host}/api/logout.json"
         ) as resp:
@@ -84,7 +85,7 @@ class Piko:
             session_id = resp_data["session"]["sessionId"]
 
         if session_id != 0:
-            raise Exception("Logout failed")
+            raise LogoutException("Logout failed")
 
     async def _async_fetch(self, *entries: Descriptor) -> dict:
         """
@@ -94,9 +95,9 @@ class Piko:
 
         # Check amount of requested entries
         if len(entries) == 0:
-            raise Exception("No entries specified")
+            raise ValueError("No entries specified")
         if len(entries) > 25:
-            raise Exception("Too many entries specified")
+            raise ValueError("Too many entries specified")
 
         def _build_param(dxs: Descriptor) -> str:
             return f"dxsEntries={dxs.key}"
@@ -167,3 +168,11 @@ class Piko:
             new[find_descriptor_by_id(entry["dxsId"]).name] = entry["value"]
 
         return new
+
+
+class LoginException(Exception):
+    """Login exception"""
+
+
+class LogoutException(Exception):
+    """Logout exception"""

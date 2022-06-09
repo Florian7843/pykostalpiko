@@ -204,6 +204,7 @@ class S0Input:
 LIST = []
 LIST_ALL = (
     LIST
+    + PVGenerator.LIST_ALL
     + House.LIST_ALL
     + Battery.LIST_ALL
     + Grid.LIST_ALL

@@ -4,7 +4,7 @@ from pykostalpiko.dxs.entry import Descriptor
 from pykostalpiko.dxs.inverter import LIST as inverter_LIST
 from pykostalpiko.dxs.statistics import LIST as statistics_LIST
 
-LIST = current_values_LIST + statistics_LIST + inverter_LIST
+LIST: list[Descriptor] = current_values_LIST + statistics_LIST + inverter_LIST
 
 
 def find_descriptor_by_id(dxs_id: int) -> Descriptor:

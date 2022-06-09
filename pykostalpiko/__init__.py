@@ -86,7 +86,7 @@ class Piko:
         if session_id != 0:
             raise Exception("Logout failed")
 
-    async def _async_fetch(self, session: ClientSession, *entries: Descriptor) -> dict:
+    async def _async_fetch(self, *entries: Descriptor) -> dict:
         """
         Fetch the data from the inverter
         Limited to 0 to 25 DXS entries
@@ -104,7 +104,7 @@ class Piko:
         params = map(_build_param, entries)
         url = f"http://{self.host}/api/dxs.json?" + "&".join(params)
 
-        async with session.get(url) as response:
+        async with self._client_session.get(url) as response:
             json_body = await response.json(content_type="text/plain")
             return self._format_response(json_body)
 
@@ -119,10 +119,7 @@ class Piko:
         data = {}
 
         for req in asyncio.as_completed(
-            [
-                self._async_fetch(self._client_session, *entries_page)
-                for entries_page in entries_paged
-            ]
+            [self._async_fetch(*entries_page) for entries_page in entries_paged]
         ):
             res = await req
 

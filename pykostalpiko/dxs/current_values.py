@@ -15,6 +15,7 @@ class PVGenerator:
         POWER = Descriptor(33556736, "PV Combined Input", "W")
 
         LIST = [POWER]
+        LIST_ALL = LIST
 
     @dataclass
     class DcInput1:
@@ -25,6 +26,7 @@ class PVGenerator:
         POWER = Descriptor(33555203, "DC Input 1 Power", "W")
 
         LIST = [CURRENT, VOLTAGE, POWER]
+        LIST_ALL = LIST
 
     @dataclass
     class DcInput2:
@@ -35,8 +37,10 @@ class PVGenerator:
         POWER = Descriptor(33555459, "DC Input 2 Power", "W")
 
         LIST = [CURRENT, VOLTAGE, POWER]
+        LIST_ALL = LIST
 
-    LIST = CombinedInput.LIST + DcInput1.LIST + DcInput2.LIST
+    LIST = []
+    LIST_ALL = CombinedInput.LIST_ALL + DcInput1.LIST_ALL + DcInput2.LIST_ALL
 
 
 @dataclass
@@ -54,6 +58,7 @@ class House:
         GRID = Descriptor(83886848, "Grid", "W")
 
         LIST = [SOLAR_GENERATOR, BATTERY, GRID]
+        LIST_ALL = LIST
 
     @dataclass
     class PhaseConsumption:
@@ -64,8 +69,10 @@ class House:
         PHASE_3 = Descriptor(83887618, "Phase 3", "W")
 
         LIST = [PHASE_1, PHASE_2, PHASE_3]
+        LIST_ALL = LIST
 
-    LIST = [SELF_CONSUMPTION] + CoveredBy.LIST + PhaseConsumption.LIST
+    LIST = [SELF_CONSUMPTION]
+    LIST_ALL = LIST + CoveredBy.LIST_ALL + PhaseConsumption.LIST_ALL
 
 
 @dataclass
@@ -96,6 +103,7 @@ class Battery:
     TEMPERATURE = Descriptor(33556227, "Battery Temperature", "°C")
 
     LIST = [VOLTAGE, CHARGE, CURRENT, CURRENT_DIRECTION, CYCLES, TEMPERATURE]
+    LIST_ALL = LIST
 
 
 @dataclass
@@ -112,6 +120,7 @@ class Grid:
         LIMITATION = Descriptor(67110144, "Limitation", "%")
 
         LIST = [OUTPUT_POWER, FREQUENCY, POWER_FACTOR, LIMITATION]
+        LIST_ALL = LIST
 
     @dataclass
     class Phase1:
@@ -122,6 +131,7 @@ class Grid:
         POWER = Descriptor(67109379, "Phase 1 Power", "W")
 
         LIST = [CURRENT, VOLTAGE, POWER]
+        LIST_ALL = LIST
 
     @dataclass
     class Phase2:
@@ -132,6 +142,7 @@ class Grid:
         POWER = Descriptor(67109635, "Phase 2 Power", "W")
 
         LIST = [CURRENT, VOLTAGE, POWER]
+        LIST_ALL = LIST
 
     @dataclass
     class Phase3:
@@ -142,8 +153,12 @@ class Grid:
         POWER = Descriptor(67109891, "Phase 3 Power", "W")
 
         LIST = [CURRENT, VOLTAGE, POWER]
+        LIST_ALL = LIST
 
-    LIST = Parameters.LIST + Phase1.LIST + Phase2.LIST + Phase3.LIST
+    LIST = []
+    LIST_ALL = (
+        LIST + Parameters.LIST_ALL + Phase1.LIST_ALL + Phase2.LIST_ALL + Phase3.LIST_ALL
+    )
 
 
 @dataclass
@@ -156,6 +171,7 @@ class AnalogInputs:
     INPUT_4 = Descriptor(167773185, "Analoginput 4", "V")
 
     LIST = [INPUT_1, INPUT_2, INPUT_3, INPUT_4]
+    LIST_ALL = LIST
 
 
 @dataclass
@@ -166,13 +182,15 @@ class S0Input:
     PULSE_COUNT_TIMEFRAME = Descriptor(150995968, "Pulse Count Timeframe", "s")
 
     LIST = [PULSE_COUNT, PULSE_COUNT_TIMEFRAME]
+    LIST_ALL = LIST
 
 
-LIST = (
-    PVGenerator.LIST
-    + House.LIST
-    + Battery.LIST
-    + Grid.LIST
-    + AnalogInputs.LIST
-    + S0Input.LIST
+LIST = []
+LIST_ALL = (
+    LIST
+    + House.LIST_ALL
+    + Battery.LIST_ALL
+    + Grid.LIST_ALL
+    + AnalogInputs.LIST_ALL
+    + S0Input.LIST_ALL
 )

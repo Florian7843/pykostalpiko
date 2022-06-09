@@ -23,6 +23,7 @@ class Day:
         SELF_CONSUMPTION_RATE,
         DEGREE_OF_SELF_SUFFICIENCY,
     ]
+    LIST_ALL = LIST
 
 
 @dataclass
@@ -58,6 +59,8 @@ class Total:
         DEGREE_OF_SELF_SUFFICIENCY,
         OPERATION_TIME,
     ]
+    LIST_ALL = LIST
 
 
-LIST = Day.LIST + Total.LIST
+LIST = []
+LIST_ALL = LIST + Day.LIST_ALL + Total.LIST_ALL

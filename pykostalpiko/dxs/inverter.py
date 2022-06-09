@@ -53,6 +53,7 @@ class Versions:
     PAR = Descriptor(16779268, "PAR")
 
     LIST = [USER_INTERFACE, FIRMWARE, HARDWARE, PAR]
+    LIST_ALL = LIST
 
 
 @dataclass
@@ -77,6 +78,7 @@ class Communication:
             PART_4 = ConfigurableDescriptor(117440794, "IP Address Part 4")
 
             LIST = [PART_1, PART_2, PART_3, PART_4]
+            LIST_ALL = LIST
 
         @dataclass
         class SubnetMask:
@@ -88,6 +90,7 @@ class Communication:
             PART_4 = ConfigurableDescriptor(117440798, "Subnet Mask Part 4")
 
             LIST = [PART_1, PART_2, PART_3, PART_4]
+            LIST_ALL = LIST
 
         @dataclass
         class DefaultGateway:
@@ -99,6 +102,7 @@ class Communication:
             PART_4 = ConfigurableDescriptor(117440802, "Default Gateway Part 4")
 
             LIST = [PART_1, PART_2, PART_3, PART_4]
+            LIST_ALL = LIST
 
         @dataclass
         class DNSServer:
@@ -110,16 +114,19 @@ class Communication:
             PART_4 = ConfigurableDescriptor(117440810, "DNS Server Part 4")
 
             LIST = [PART_1, PART_2, PART_3, PART_4]
+            LIST_ALL = LIST
 
-        LIST = (
-            [MAC_ADDRESS]
-            + IPAddress.LIST
-            + SubnetMask.LIST
-            + DefaultGateway.LIST
-            + DNSServer.LIST
+        LIST = [MAC_ADDRESS]
+        LIST_ALL = (
+            LIST
+            + IPAddress.LIST_ALL
+            + SubnetMask.LIST_ALL
+            + DefaultGateway.LIST_ALL
+            + DNSServer.LIST_ALL
         )
 
-    LIST = [INVERTER_ADDRESS] + Network.LIST
+    LIST = [INVERTER_ADDRESS]
+    LIST_ALL = LIST + Network.LIST_ALL
 
 
 @dataclass
@@ -144,6 +151,7 @@ class RS485:
     BAUD_RATE = ConfigurableDescriptor(117441029, "Baud Rate")
 
     LIST = [BUS_TERMINATION, BUS_BIAS_VOLTAGE, PROTOCOL, BAUD_RATE]
+    LIST_ALL = LIST
 
 
 # TODO: /settings/communication/modem
@@ -157,6 +165,7 @@ class PortalConfiguration:
     # 117441542 is an unknown dxsId
 
     LIST = [ACTIVE_PORTAL]
+    LIST_ALL = LIST
 
 
 @dataclass
@@ -166,6 +175,7 @@ class DataLogger:
     LOG_INTERVAL = ConfigurableDescriptor(150995968, "Log Interval")
 
     LIST = [LOG_INTERVAL]
+    LIST_ALL = LIST
 
 
 # TODO: /settings/generator-configuration
@@ -176,18 +186,19 @@ class DataLogger:
 
 # TODO: /settings/analog-inputs
 
-LIST = (
-    [
-        NAME,
-        OPERATION_STATUS,
-        SERIAL_NUMBER,
-        ARTICLE_NUMBER,
-        COUNTRY_SETTINGS,
-        COUNTRY_SETTINGS_VERSION,
-    ]
-    + Versions.LIST
-    + Communication.LIST
-    + RS485.LIST
-    + PortalConfiguration.LIST
-    + DataLogger.LIST
+LIST = [
+    NAME,
+    OPERATION_STATUS,
+    SERIAL_NUMBER,
+    ARTICLE_NUMBER,
+    COUNTRY_SETTINGS,
+    COUNTRY_SETTINGS_VERSION,
+]
+LIST_ALL = (
+    LIST
+    + Versions.LIST_ALL
+    + Communication.LIST_ALL
+    + RS485.LIST_ALL
+    + PortalConfiguration.LIST_ALL
+    + DataLogger.LIST_ALL
 )

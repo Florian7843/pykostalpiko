@@ -23,7 +23,7 @@ async def asnyc_main():
 
     async with ClientSession() as session:
         async with Piko(session, sys.argv[1], **user) as piko:
-            print(await piko.async_fetch(LIST))
+            print(await piko.async_fetch_multiple(LIST))
 
 
 if __name__ == "__main__":

@@ -109,7 +109,7 @@ class Piko:
             json_body = await response.json(content_type="text/plain")
             return self._format_response(json_body)
 
-    async def async_fetch(self, descriptors: list[Descriptor]) -> dict:
+    async def async_fetch_multiple(self, descriptors: list[Descriptor]) -> dict:
         """Fetch the data from the inverter."""
 
         # Spread the entries into groups of 25 to avoid too many dxsEntries
@@ -129,6 +129,11 @@ class Piko:
                 data = {**data, **res}
 
         return data
+
+    async def async_fetch(self, descriptor: Descriptor) -> Any:
+        """Fetch the data from the inverter."""
+        data = await self.async_fetch_multiple([descriptor])
+        return data[descriptor.name]
 
     async def async_set_descriptors(
         self, descriptors: list[tuple[Descriptor, Any]]

@@ -1,6 +1,7 @@
 """Simple cli tool to read the kostal piko data."""
 import asyncio
 import sys
+from unicodedata import name
 
 from aiohttp import ClientSession
 

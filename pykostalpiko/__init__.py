@@ -78,6 +78,7 @@ class Piko:
             self._session_id = resp_data["session"]["sessionId"]
 
     async def async_logout(self) -> None:
+        """Logout from the inverter."""
         async with self._client_session.get(
             f"http://{self.host}/api/logout.json"
         ) as resp:

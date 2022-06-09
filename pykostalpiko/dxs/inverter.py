@@ -178,6 +178,7 @@ class DataLogger:
 
 LIST = (
     [
+        NAME,
         OPERATION_STATUS,
         SERIAL_NUMBER,
         ARTICLE_NUMBER,

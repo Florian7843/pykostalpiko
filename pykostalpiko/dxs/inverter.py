@@ -47,11 +47,11 @@ MODEL = Descriptor(16780544, "Model")
 class Versions:
     """DxsEntries describing the versions of the inverter."""
 
-    USER_INTERFACE = Descriptor(16779267, "User Interface")
-    FIRMWARE = Descriptor(16779265, "Firmware")
-    HARDWARE = Descriptor(16779266, "Hardware")
+    USER_INTERFACE = Descriptor(16779267, "User Interface Version")
+    FIRMWARE = Descriptor(16779265, "Firmware Version")
+    HARDWARE = Descriptor(16779266, "Hardware Version")
     # This is likely some abbreviation
-    PAR = Descriptor(16779268, "PAR")
+    PAR = Descriptor(16779268, "PAR Version")
 
     LIST = [USER_INTERFACE, FIRMWARE, HARDWARE, PAR]
     LIST_ALL = LIST
@@ -144,12 +144,12 @@ class RS485:
             return "Modbus"
         raise MapperException("Failed mapping Protocol", val)
 
-    BUS_TERMINATION = ConfigurableDescriptor(117441027, "Bus Termination")
-    BUS_BIAS_VOLTAGE = ConfigurableDescriptor(117441026, "Bus Bias Voltage")
+    BUS_TERMINATION = ConfigurableDescriptor(117441027, "RS485 Bus Termination")
+    BUS_BIAS_VOLTAGE = ConfigurableDescriptor(117441026, "RS485 Bus Bias Voltage")
     PROTOCOL = ConfigurableDescriptor(
-        117441028, "Protocol", DescriptorOptions(mapper_function=_protocol_mapper)
+        117441028, "RS485 Protocol", DescriptorOptions(mapper_function=_protocol_mapper)
     )
-    BAUD_RATE = ConfigurableDescriptor(117441029, "Baud Rate")
+    BAUD_RATE = ConfigurableDescriptor(117441029, "RS485 Baud Rate")
 
     LIST = [BUS_TERMINATION, BUS_BIAS_VOLTAGE, PROTOCOL, BAUD_RATE]
     LIST_ALL = LIST

@@ -8,12 +8,12 @@ from pykostalpiko.dxs.entry import Descriptor, DescriptorOptions
 class Day:
     """DxsEntries for the daily statistics."""
 
-    YIELD = Descriptor(251658754, "Yield", "Wh")
-    HOME_CONSUMPTION = Descriptor(251659010, "Home Consumption", "Wh")
-    SELF_CONSUMPTION = Descriptor(251659266, "Self Consumption", "Wh")
-    SELF_CONSUMPTION_RATE = Descriptor(251659278, "Self Consumtion Rate", "%")
+    YIELD = Descriptor(251658754, "Todays Yield", "Wh")
+    HOME_CONSUMPTION = Descriptor(251659010, "Todays Home Consumption", "Wh")
+    SELF_CONSUMPTION = Descriptor(251659266, "Todays Self Consumption", "Wh")
+    SELF_CONSUMPTION_RATE = Descriptor(251659278, "Todays Self Consumtion Rate", "%")
     DEGREE_OF_SELF_SUFFICIENCY = Descriptor(
-        251659279, "Degree of Self Sufficiency", "%"
+        251659279, "Todays Degree of Self Sufficiency", "%"
     )
 
     LIST = [
@@ -31,23 +31,23 @@ class Total:
     """DxsEntries for the total statistics."""
 
     YIELD = Descriptor(
-        251658753, "Yield", "Wh", DescriptorOptions(multiplication_factor=1000)
+        251658753, "Total Yield", "Wh", DescriptorOptions(multiplication_factor=1000)
     )
     HOME_CONSUMPTION = Descriptor(
         251659009,
-        "Home Consumption",
+        "Total Home Consumption",
         "Wh",
         DescriptorOptions(multiplication_factor=1000),
     )
     SELF_CONSUMPTION = Descriptor(
         251659265,
-        "Self Consumption",
+        "Total Self Consumption",
         "Wh",
         DescriptorOptions(multiplication_factor=1000),
     )
-    SELF_CONSUMPTION_RATE = Descriptor(251659280, "Self Consumtion Rate", "%")
+    SELF_CONSUMPTION_RATE = Descriptor(251659280, "Total Self Consumtion Rate", "%")
     DEGREE_OF_SELF_SUFFICIENCY = Descriptor(
-        251659281, "Degree of Self Sufficiency", "%"
+        251659281, "Total Degree of Self Sufficiency", "%"
     )
     OPERATION_TIME = Descriptor(251658496, "Operation Time", "h")
 

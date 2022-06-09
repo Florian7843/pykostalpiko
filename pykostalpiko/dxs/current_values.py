@@ -21,9 +21,9 @@ class PVGenerator:
     class DcInput1:
         """DxsEntries describing the DC input 1."""
 
-        CURRENT = Descriptor(33555201, "DC Input 1 Current", "A")
-        VOLTAGE = Descriptor(33555202, "DC Input 1 Voltage", "V")
-        POWER = Descriptor(33555203, "DC Input 1 Power", "W")
+        CURRENT = Descriptor(33555201, "PV DC Input 1 Current", "A")
+        VOLTAGE = Descriptor(33555202, "PV DC Input 1 Voltage", "V")
+        POWER = Descriptor(33555203, "PV DC Input 1 Power", "W")
 
         LIST = [CURRENT, VOLTAGE, POWER]
         LIST_ALL = LIST
@@ -32,9 +32,9 @@ class PVGenerator:
     class DcInput2:
         """DxsEntries describing the DC Input 2."""
 
-        CURRENT = Descriptor(33555457, "DC Input 2 Current", "A")
-        VOLTAGE = Descriptor(33555458, "DC Input 2 Voltage", "V")
-        POWER = Descriptor(33555459, "DC Input 2 Power", "W")
+        CURRENT = Descriptor(33555457, "PV DC Input 2 Current", "A")
+        VOLTAGE = Descriptor(33555458, "PV DC Input 2 Voltage", "V")
+        POWER = Descriptor(33555459, "PV DC Input 2 Power", "W")
 
         LIST = [CURRENT, VOLTAGE, POWER]
         LIST_ALL = LIST
@@ -43,9 +43,9 @@ class PVGenerator:
     class DcInput3:
         """DxsEntries describing the DC Input 3."""
 
-        CURRENT = Descriptor(33555713, "DC Input 3 Current", "A")
-        VOLTAGE = Descriptor(33555714, "DC Input 3 Voltage", "V")
-        POWER = Descriptor(33555715, "DC Input 3 Power", "W")
+        CURRENT = Descriptor(33555713, "PV DC Input 3 Current", "A")
+        VOLTAGE = Descriptor(33555714, "PV DC Input 3 Voltage", "V")
+        POWER = Descriptor(33555715, "PV DC Input 3 Power", "W")
 
         LIST = [CURRENT, VOLTAGE, POWER]
         LIST_ALL = LIST
@@ -63,15 +63,15 @@ class PVGenerator:
 class House:
     """DxsEntries concerning the power consumption of the house."""
 
-    SELF_CONSUMPTION = Descriptor(83888128, "Self Consumption", "W")
+    SELF_CONSUMPTION = Descriptor(83888128, "Home Self Consumption", "W")
 
     @dataclass
     class CoveredBy:
         """DxsEntries describing where the power of the house comes from."""
 
-        SOLAR_GENERATOR = Descriptor(83886336, "Solar Generator", "W")
-        BATTERY = Descriptor(83886592, "Battery", "W")
-        GRID = Descriptor(83886848, "Grid", "W")
+        SOLAR_GENERATOR = Descriptor(83886336, "House Coverage Solar Generator", "W")
+        BATTERY = Descriptor(83886592, "House Coverage Battery", "W")
+        GRID = Descriptor(83886848, "House Coverage Grid", "W")
 
         LIST = [SOLAR_GENERATOR, BATTERY, GRID]
         LIST_ALL = LIST
@@ -80,9 +80,9 @@ class House:
     class PhaseConsumption:
         """DxsEntries describing on which phases the power consumption of the house is."""
 
-        PHASE_1 = Descriptor(83887106, "Phase 1", "W")
-        PHASE_2 = Descriptor(83887362, "Phase 2", "W")
-        PHASE_3 = Descriptor(83887618, "Phase 3", "W")
+        PHASE_1 = Descriptor(83887106, "House Phase 1", "W")
+        PHASE_2 = Descriptor(83887362, "House Phase 2", "W")
+        PHASE_3 = Descriptor(83887618, "House Phase 3", "W")
 
         LIST = [PHASE_1, PHASE_2, PHASE_3]
         LIST_ALL = LIST
@@ -130,10 +130,10 @@ class Grid:
     class Parameters:
         """DxsEntries describing the current parameters of the grid."""
 
-        OUTPUT_POWER = Descriptor(67109120, "Output Power", "W")
-        FREQUENCY = Descriptor(67110400, "Frequency", "Hz")
-        POWER_FACTOR = Descriptor(67110656, "Power Factor")
-        LIMITATION = Descriptor(67110144, "Limitation", "%")
+        OUTPUT_POWER = Descriptor(67109120, "Grid Output Power", "W")
+        FREQUENCY = Descriptor(67110400, "Grid Frequency", "Hz")
+        POWER_FACTOR = Descriptor(67110656, "Grid Power Factor")
+        LIMITATION = Descriptor(67110144, "Grid Limitation", "%")
 
         LIST = [OUTPUT_POWER, FREQUENCY, POWER_FACTOR, LIMITATION]
         LIST_ALL = LIST
@@ -142,9 +142,9 @@ class Grid:
     class Phase1:
         """DxsEntries describing the current parameters of the phase 1 from the power grid."""
 
-        CURRENT = Descriptor(67109377, "Phase 1 Current", "A")
-        VOLTAGE = Descriptor(67109378, "Phase 1 Voltage", "V")
-        POWER = Descriptor(67109379, "Phase 1 Power", "W")
+        CURRENT = Descriptor(67109377, "Grid Phase 1 Current", "A")
+        VOLTAGE = Descriptor(67109378, "Grid Phase 1 Voltage", "V")
+        POWER = Descriptor(67109379, "Grid Phase 1 Power", "W")
 
         LIST = [CURRENT, VOLTAGE, POWER]
         LIST_ALL = LIST
@@ -153,9 +153,9 @@ class Grid:
     class Phase2:
         """DxsEntries describing the current parameters of the phase 2 from the power grid."""
 
-        CURRENT = Descriptor(67109633, "Phase 2 Current", "A")
-        VOLTAGE = Descriptor(67109634, "Phase 2 Voltage", "V")
-        POWER = Descriptor(67109635, "Phase 2 Power", "W")
+        CURRENT = Descriptor(67109633, "Grid Phase 2 Current", "A")
+        VOLTAGE = Descriptor(67109634, "Grid Phase 2 Voltage", "V")
+        POWER = Descriptor(67109635, "Grid Phase 2 Power", "W")
 
         LIST = [CURRENT, VOLTAGE, POWER]
         LIST_ALL = LIST
@@ -164,9 +164,9 @@ class Grid:
     class Phase3:
         """DxsEntries describing the current parameters of the phase 3 from the power grid."""
 
-        CURRENT = Descriptor(67109889, "Phase 3 Current", "A")
-        VOLTAGE = Descriptor(67109890, "Phase 3 Voltage", "V")
-        POWER = Descriptor(67109891, "Phase 3 Power", "W")
+        CURRENT = Descriptor(67109889, "Grid Phase 3 Current", "A")
+        VOLTAGE = Descriptor(67109890, "Grid Phase 3 Voltage", "V")
+        POWER = Descriptor(67109891, "Grid Phase 3 Power", "W")
 
         LIST = [CURRENT, VOLTAGE, POWER]
         LIST_ALL = LIST
@@ -194,8 +194,8 @@ class AnalogInputs:
 class S0Input:
     """DxsEntries concerning the S0 input."""
 
-    PULSE_COUNT = Descriptor(184549632, "Pulse Count")
-    PULSE_COUNT_TIMEFRAME = Descriptor(150995968, "Pulse Count Timeframe", "s")
+    PULSE_COUNT = Descriptor(184549632, "S0 Input Pulse Count")
+    PULSE_COUNT_TIMEFRAME = Descriptor(150995968, "S0 Input Pulse Count Timeframe", "s")
 
     LIST = [PULSE_COUNT, PULSE_COUNT_TIMEFRAME]
     LIST_ALL = LIST

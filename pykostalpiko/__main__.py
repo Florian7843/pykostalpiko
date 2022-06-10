@@ -5,7 +5,7 @@ import sys
 from aiohttp import ClientSession
 
 from pykostalpiko import Piko
-from pykostalpiko.dxs.current_values import LIST
+from pykostalpiko.dxs.current_values import LIST_ALL
 
 
 def main():
@@ -23,7 +23,7 @@ async def asnyc_main():
 
     async with ClientSession() as session:
         async with Piko(session, sys.argv[1], **user) as piko:
-            print(await piko.async_fetch_multiple(LIST))
+            print(await piko.async_fetch_multiple(LIST_ALL))
 
 
 if __name__ == "__main__":

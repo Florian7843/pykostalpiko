@@ -50,9 +50,15 @@ class Piko:
         async with self._client_session.get(
             f"http://{self.host}/api/login.json"
         ) as resp:
-            resp_data = await resp.json(content_type="text/plain")
-            salt = resp_data["salt"]
-            session_id = resp_data["session"]["sessionId"]
+            # Sometimes the inverter doesn't respond with a salt and sessionId. This just means that the login failed.
+            try:
+                resp_data = await resp.json(content_type="text/plain")
+                salt = resp_data["salt"]
+                session_id = resp_data["session"]["sessionId"]
+            except KeyError:
+                raise LoginException(
+                    "Something unexpected happened. The inverter doesn't provide a login session. Please try again later."
+                )
 
         # Encrypt and encode the password with the salt
         password_sha1 = sha1((self.password + salt).encode("utf-8")).digest()
@@ -76,6 +82,8 @@ class Piko:
                 raise LoginException("Login failed")
 
             self._session_id = resp_data["session"]["sessionId"]
+
+        return True
 
     async def async_logout(self) -> None:
         """Logout from the inverter."""
@@ -171,7 +179,11 @@ class Piko:
         entries = response["dxsEntries"]
 
         for entry in entries:
-            new[find_descriptor_by_id(entry["dxsId"]).name] = entry["value"]
+            value = entry["value"]
+            if isinstance(value, float):
+                value = round(value, 2)
+
+            new[find_descriptor_by_id(entry["dxsId"]).name] = value
 
         return new
 

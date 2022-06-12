@@ -1,6 +1,8 @@
 """Description of DxsEntries."""
 from dataclasses import dataclass
-from typing import Any, Callable
+from typing import Any, Callable, Optional
+
+from click import option
 
 
 @dataclass
@@ -10,7 +12,7 @@ class DescriptorOptions:
     def __init__(
         self,
         configurable: bool = False,
-        mapper_function: Callable[[Any], Any] = None,
+        mapper_function: Optional[Callable[[Any], Any]] = None,
         multiplication_factor: float = 1,
     ) -> None:
         """Constructor."""
@@ -27,8 +29,8 @@ class Descriptor:
         self,
         key: int,
         name: str,
-        description: str | None = None,
-        unit: str = None,
+        description: Optional[str] = None,
+        unit: Optional[str] = None,
         options: DescriptorOptions = DescriptorOptions(),
     ) -> None:
         """Constructor."""
@@ -47,10 +49,13 @@ class ConfigurableDescriptor(Descriptor):
         self,
         key: int,
         name: str,
-        description: str | None = None,
-        unit: str = None,
+        description: Optional[str] = None,
+        unit: Optional[str] = None,
         options: DescriptorOptions = DescriptorOptions(configurable=True),
     ) -> None:
+        if options.configurable is False:
+            options.configurable = True
+
         super().__init__(key, name, description, unit, options)
 
 

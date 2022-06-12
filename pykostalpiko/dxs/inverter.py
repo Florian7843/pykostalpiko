@@ -31,7 +31,7 @@ OPERATION_STATUS = Descriptor(
     16780032,
     "Operation Status",
     "Current status of the Inverter",
-    DescriptorOptions(mapper_function=_operation_status_mapper),
+    options=DescriptorOptions(mapper_function=_operation_status_mapper),
 )
 SERIAL_NUMBER = Descriptor(16777728, "Serial Number", "Serial number of the inverter.")
 ARTICLE_NUMBER = Descriptor(
@@ -191,19 +191,19 @@ class Communication:
     LIST_ALL = LIST + Network.LIST_ALL
 
 
+def _protocol_mapper(val: int) -> str:
+    """Map the protocol to a string."""
+
+    if val == 0:
+        return "KOSTAL"
+    if val == 1:
+        return "Modbus"
+    raise MapperException("Failed mapping Protocol", val)
+
+
 @dataclass
 class RS485:
     """DxsEntries describing the RS485 communication."""
-
-    @classmethod
-    def _protocol_mapper(cls, val: int) -> str:
-        """Map the protocol to a string."""
-
-        if val == 0:
-            return "KOSTAL"
-        if val == 1:
-            return "Modbus"
-        raise MapperException("Failed mapping Protocol", val)
 
     BUS_TERMINATION = ConfigurableDescriptor(117441027, "RS485 Bus Termination")
     BUS_BIAS_VOLTAGE = ConfigurableDescriptor(117441026, "RS485 Bus Bias Voltage")
@@ -211,7 +211,7 @@ class RS485:
         117441028,
         "RS485 Protocol",
         "DESCRIPTION",
-        DescriptorOptions(mapper_function=_protocol_mapper),
+        options=DescriptorOptions(mapper_function=_protocol_mapper),
     )
     BAUD_RATE = ConfigurableDescriptor(117441029, "RS485 Baud Rate", None)
 

@@ -146,21 +146,22 @@ class House:
     LIST_ALL = LIST + CoveredBy.LIST_ALL + PhaseConsumption.LIST_ALL
 
 
+def _batter_current_direction_mapper(val: int) -> str:
+    """Map the battery current direction to a string."""
+
+    if val == 0:
+        return Battery.CURRENT_DIRECTION_DISCHARGING
+    if val == 1:
+        return Battery.CURRENT_DIRECTION_CHARING
+    raise MapperException("Failed mapping Battery Current Direction", val)
+
+
 @dataclass
 class Battery:
     """DxsEntries concerning the battery."""
 
     CURRENT_DIRECTION_CHARING = "Charging"
     CURRENT_DIRECTION_DISCHARGING = "Discharging"
-
-    def _batter_current_direction_mapper(self, val: int) -> str:
-        """Map the battery current direction to a string."""
-
-        if val == 0:
-            return self.CURRENT_DIRECTION_DISCHARGING
-        if val == 1:
-            return self.CURRENT_DIRECTION_CHARING
-        raise MapperException("Failed mapping Battery Current Direction", val)
 
     VOLTAGE = Descriptor(33556226, "Battery Voltage", "Voltage of the battery.", "V")
     CHARGE = Descriptor(33556229, "Battery Charge", "Charge of the battery.", "%")
@@ -169,7 +170,7 @@ class Battery:
         33556230,
         "Battery Current Direction",
         "Displays if the battery is charging or discharging.",
-        DescriptorOptions(mapper_function=_batter_current_direction_mapper),
+        options=DescriptorOptions(mapper_function=_batter_current_direction_mapper),
     )
     CYCLES = Descriptor(
         33556228, "Battery Cycles", "Number of charge cycles the battery has had."

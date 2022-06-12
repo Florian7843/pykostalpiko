@@ -171,7 +171,7 @@ class Piko:
                 raise Exception("An error occured setting the descriptors")
 
     @classmethod
-    def _format_response(cls, response) -> dict:
+    def _format_response(cls, response) -> dict[str, Any]:
         if response is None:
             return None
 
@@ -183,7 +183,15 @@ class Piko:
             if isinstance(value, float):
                 value = round(value, 2)
 
-            new[find_descriptor_by_id(entry["dxsId"]).name] = value
+            descriptor = find_descriptor_by_id(entry["dxsId"])
+
+            if descriptor.options.multiplication_factor != 1:
+                value = value * descriptor.options.multiplication_factor
+
+            if descriptor.options.mapper_function is not None:
+                value = descriptor.options.mapper_function(value)
+
+            new[descriptor.name] = value
 
         return new
 

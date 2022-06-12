@@ -90,7 +90,7 @@ from pykostalpiko.dxs.current_values import LIST
 async def asnyc_main():
     async with ClientSession() as session:
         async with Piko(session, "<ip-address>") as piko:
-            print(await piko.async_fetch(LIST))
+            print(await piko.async_fetch_multiple(LIST))
 
 
 asyncio.run(asnyc_main())

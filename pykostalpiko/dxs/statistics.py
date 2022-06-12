@@ -84,7 +84,7 @@ class Total:
         "%",
     )
     OPERATION_TIME = Descriptor(
-        251658496, "Operation Time", "Running time of the inverter." "h"
+        251658496, "Operation Time", "Running time of the inverter.", "h"
     )
 
     LIST = [

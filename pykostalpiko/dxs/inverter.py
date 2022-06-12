@@ -30,15 +30,22 @@ def _operation_status_mapper(val: int) -> str:
 OPERATION_STATUS = Descriptor(
     16780032,
     "Operation Status",
+    "Current status of the Inverter",
     DescriptorOptions(mapper_function=_operation_status_mapper),
 )
-SERIAL_NUMBER = Descriptor(16777728, "Serial Number")
-ARTICLE_NUMBER = Descriptor(16777472, "Article Number")
-COUNTRY_SETTINGS = Descriptor(16779522, "Country Settings")
-COUNTRY_SETTINGS_VERSION = Descriptor(16779521, "Country Settings Version")
+SERIAL_NUMBER = Descriptor(16777728, "Serial Number", "Serial number of the inverter.")
+ARTICLE_NUMBER = Descriptor(
+    16777472, "Article Number", "Article number of the inverter."
+)
+COUNTRY_SETTINGS = Descriptor(
+    16779522, "Country Settings", "Country settings of the inverter."
+)
+COUNTRY_SETTINGS_VERSION = Descriptor(
+    16779521, "Country Settings Version", "Country settings version of the inverter."
+)
 
-NAME = ConfigurableDescriptor(16777984, "Name")
-MODEL = Descriptor(16780544, "Model")
+NAME = ConfigurableDescriptor(16777984, "Name", "Name of the inverter.")
+MODEL = Descriptor(16780544, "Model", "Model of the inverter.")
 
 # TODO: /settings/general/login
 
@@ -47,11 +54,13 @@ MODEL = Descriptor(16780544, "Model")
 class Versions:
     """DxsEntries describing the versions of the inverter."""
 
-    USER_INTERFACE = Descriptor(16779267, "User Interface Version")
-    FIRMWARE = Descriptor(16779265, "Firmware Version")
-    HARDWARE = Descriptor(16779266, "Hardware Version")
+    USER_INTERFACE = Descriptor(
+        16779267, "User Interface Version", "User interface version."
+    )
+    FIRMWARE = Descriptor(16779265, "Firmware Version", "Firmware version.")
+    HARDWARE = Descriptor(16779266, "Hardware Version", "Hardware version.")
     # This is likely some abbreviation
-    PAR = Descriptor(16779268, "PAR Version")
+    PAR = Descriptor(16779268, "PAR Version", "PAR version.")
 
     LIST = [USER_INTERFACE, FIRMWARE, HARDWARE, PAR]
     LIST_ALL = LIST
@@ -61,22 +70,34 @@ class Versions:
 class Communication:
     """DxsEntries describing the communication with the inverter."""
 
-    INVERTER_ADDRESS = ConfigurableDescriptor(117441025, "Inverter Address")
+    INVERTER_ADDRESS = ConfigurableDescriptor(
+        117441025, "Inverter Address", "RS485 address of the inverter."
+    )
 
     @dataclass
     class Network:
         """DxsEntries describing the network connection with the inverter."""
 
-        MAC_ADDRESS = Descriptor(117440811, "MAC Address")
+        MAC_ADDRESS = Descriptor(
+            117440811, "MAC Address", "MAC address of the inverter."
+        )
 
         @dataclass
         class IPAddress:
             """DxsEntries describing the IPv4 Address."""
 
-            PART_1 = ConfigurableDescriptor(117440791, "IP Address Part 1")
-            PART_2 = ConfigurableDescriptor(117440792, "IP Address Part 2")
-            PART_3 = ConfigurableDescriptor(117440793, "IP Address Part 3")
-            PART_4 = ConfigurableDescriptor(117440794, "IP Address Part 4")
+            PART_1 = ConfigurableDescriptor(
+                117440791, "IP Address Part 1", "First quadrant of the IPv4 address."
+            )
+            PART_2 = ConfigurableDescriptor(
+                117440792, "IP Address Part 2", "Second quadrant of the IPv4 address."
+            )
+            PART_3 = ConfigurableDescriptor(
+                117440793, "IP Address Part 3", "Third quadrant of the IPv4 address."
+            )
+            PART_4 = ConfigurableDescriptor(
+                117440794, "IP Address Part 4", "Fourth quadrant of the IPv4 address."
+            )
 
             LIST = [PART_1, PART_2, PART_3, PART_4]
             LIST_ALL = LIST
@@ -85,10 +106,18 @@ class Communication:
         class SubnetMask:
             """DxsEntries describing the Subnet Mask."""
 
-            PART_1 = ConfigurableDescriptor(117440795, "Subnet Mask Part 1")
-            PART_2 = ConfigurableDescriptor(117440796, "Subnet Mask Part 2")
-            PART_3 = ConfigurableDescriptor(117440797, "Subnet Mask Part 3")
-            PART_4 = ConfigurableDescriptor(117440798, "Subnet Mask Part 4")
+            PART_1 = ConfigurableDescriptor(
+                117440795, "Subnet Mask Part 1", "First quadrant of the Subnet Mask."
+            )
+            PART_2 = ConfigurableDescriptor(
+                117440796, "Subnet Mask Part 2", "Second quadrant of the Subnet Mask."
+            )
+            PART_3 = ConfigurableDescriptor(
+                117440797, "Subnet Mask Part 3", "Third quadrant of the Subnet Mask."
+            )
+            PART_4 = ConfigurableDescriptor(
+                117440798, "Subnet Mask Part 4", "Fourth quadrant of the Subnet Mask."
+            )
 
             LIST = [PART_1, PART_2, PART_3, PART_4]
             LIST_ALL = LIST
@@ -97,10 +126,26 @@ class Communication:
         class DefaultGateway:
             """DxsEntries describing the Default Gateway."""
 
-            PART_1 = ConfigurableDescriptor(117440799, "Default Gateway Part 1")
-            PART_2 = ConfigurableDescriptor(117440800, "Default Gateway Part 2")
-            PART_3 = ConfigurableDescriptor(117440801, "Default Gateway Part 3")
-            PART_4 = ConfigurableDescriptor(117440802, "Default Gateway Part 4")
+            PART_1 = ConfigurableDescriptor(
+                117440799,
+                "Default Gateway Part 1",
+                "First quadrant of the Default Gateway address.",
+            )
+            PART_2 = ConfigurableDescriptor(
+                117440800,
+                "Default Gateway Part 2",
+                "Second quadrant of the Default Gateway address.",
+            )
+            PART_3 = ConfigurableDescriptor(
+                117440801,
+                "Default Gateway Part 3",
+                "Third quadrant of the Default Gateway address.",
+            )
+            PART_4 = ConfigurableDescriptor(
+                117440802,
+                "Default Gateway Part 4",
+                "Fourth quadrant of the Default Gateway address.",
+            )
 
             LIST = [PART_1, PART_2, PART_3, PART_4]
             LIST_ALL = LIST
@@ -109,10 +154,26 @@ class Communication:
         class DNSServer:
             """DxsEntries describing the DNS Server."""
 
-            PART_1 = ConfigurableDescriptor(117440807, "DNS Server Part 1")
-            PART_2 = ConfigurableDescriptor(117440808, "DNS Server Part 2")
-            PART_3 = ConfigurableDescriptor(117440809, "DNS Server Part 3")
-            PART_4 = ConfigurableDescriptor(117440810, "DNS Server Part 4")
+            PART_1 = ConfigurableDescriptor(
+                117440807,
+                "DNS Server Part 1",
+                "First quadrant of the DNS Server address.",
+            )
+            PART_2 = ConfigurableDescriptor(
+                117440808,
+                "DNS Server Part 2",
+                "Second quadrant of the DNS Server address.",
+            )
+            PART_3 = ConfigurableDescriptor(
+                117440809,
+                "DNS Server Part 3",
+                "Third quadrant of the DNS Server address.",
+            )
+            PART_4 = ConfigurableDescriptor(
+                117440810,
+                "DNS Server Part 4",
+                "Fourth quadrant of the DNS Server address.",
+            )
 
             LIST = [PART_1, PART_2, PART_3, PART_4]
             LIST_ALL = LIST
@@ -147,9 +208,12 @@ class RS485:
     BUS_TERMINATION = ConfigurableDescriptor(117441027, "RS485 Bus Termination")
     BUS_BIAS_VOLTAGE = ConfigurableDescriptor(117441026, "RS485 Bus Bias Voltage")
     PROTOCOL = ConfigurableDescriptor(
-        117441028, "RS485 Protocol", DescriptorOptions(mapper_function=_protocol_mapper)
+        117441028,
+        "RS485 Protocol",
+        "DESCRIPTION",
+        DescriptorOptions(mapper_function=_protocol_mapper),
     )
-    BAUD_RATE = ConfigurableDescriptor(117441029, "RS485 Baud Rate")
+    BAUD_RATE = ConfigurableDescriptor(117441029, "RS485 Baud Rate", None)
 
     LIST = [BUS_TERMINATION, BUS_BIAS_VOLTAGE, PROTOCOL, BAUD_RATE]
     LIST_ALL = LIST
@@ -162,7 +226,7 @@ class RS485:
 class PortalConfiguration:
     """DxsEntries describing the portal configuration."""
 
-    ACTIVE_PORTAL = Descriptor(117441538, "Active Portal")
+    ACTIVE_PORTAL = Descriptor(117441538, "Active Portal", "Name of the active portal.")
     # 117441542 is an unknown dxsId
 
     LIST = [ACTIVE_PORTAL]

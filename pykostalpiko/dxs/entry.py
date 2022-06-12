@@ -27,12 +27,14 @@ class Descriptor:
         self,
         key: int,
         name: str,
+        description: str | None = None,
         unit: str = None,
         options: DescriptorOptions = DescriptorOptions(),
     ) -> None:
         """Constructor."""
         self.key = key
         self.name = name
+        self.description = description
         self.unit = unit
         self.options = options
 
@@ -45,10 +47,11 @@ class ConfigurableDescriptor(Descriptor):
         self,
         key: int,
         name: str,
+        description: str | None = None,
         unit: str = None,
         options: DescriptorOptions = DescriptorOptions(configurable=True),
     ) -> None:
-        super().__init__(key, name, unit, options)
+        super().__init__(key, name, description, unit, options)
 
 
 class MapperException(Exception):

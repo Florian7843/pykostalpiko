@@ -50,15 +50,16 @@ class Piko:
         async with self._client_session.get(
             f"http://{self.host}/api/login.json"
         ) as resp:
-            # Sometimes the inverter doesn't respond with a salt and sessionId. This just means that the login failed.
+            # Sometimes the inverter doesn't respond with a salt and sessionId.
+            # This just means that the login failed.
             try:
                 resp_data = await resp.json(content_type="text/plain")
                 salt = resp_data["salt"]
                 session_id = resp_data["session"]["sessionId"]
-            except KeyError:
+            except KeyError as e:
                 raise LoginException(
-                    "Something unexpected happened. The inverter doesn't provide a login session. Please try again later."
-                )
+                    "The inverter doesn't provide a login session. Try again later."
+                ) from e
 
         # Encrypt and encode the password with the salt
         password_sha1 = sha1((self.password + salt).encode("utf-8")).digest()

@@ -1,5 +1,6 @@
 """DxsEntries general constants and methods."""
 from typing import Any
+
 from pykostalpiko.dxs.current_values import LIST_ALL as current_values_LIST
 from pykostalpiko.dxs.entry import Descriptor
 from pykostalpiko.dxs.inverter import LIST_ALL as inverter_LIST

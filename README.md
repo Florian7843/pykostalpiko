@@ -147,7 +147,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - florian7843@gmail.com
+Florian Schmidt - floriansch7843@gmail.com
 
 Project Link: [https://github.com/Florian7843/pykostalpiko](https://github.com/Florian7843/pykostalpiko)
 

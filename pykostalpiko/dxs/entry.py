@@ -2,8 +2,6 @@
 from dataclasses import dataclass
 from typing import Any, Callable, Optional
 
-from click import option
-
 
 @dataclass
 class DescriptorOptions:
